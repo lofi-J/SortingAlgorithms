@@ -2,60 +2,60 @@
 
 public class MergeSort
 {
-    public int[] temp;
-    void Merge(int[] arr, int start, int mid, int end)
+    int[] temp = new int[10]; //임시 배열의 크기 10
+    public void Merge(int[] array, int start, int middle, int end)
     {
-        int i = start;
-        int j = mid + 1;
-        int k = start;
+        int left = start;
+        int right = middle + 1;
+        int index = start;
 
-        while (i <= mid && j <= end)
+        while( left <= middle && right <= end )
         {
-            if (arr[i] < arr[j])
+            if (array[left] <= array[right])
             {
-                temp[k] = arr[i];
-                i++;
+                temp[index] = array[left];
+                left++;
             }
             else
             {
-                temp[k] = arr[j];
-                j++;
+                temp[index] = array[right];
+                right++;
             }
-            k++;
+            index++;
         }
-        if (i > mid)
+
+        if (left > middle)
         {
-            for (int t=j; t<=end; t++)
+            for (int i = right; i <= end; i++)
             {
-                temp[k] = arr[t];
-                k++;
+                temp[index] = array[i];
+                index++;
             }
         }
         else
         {
-            for (int t=i; t <= mid; t++)
+            for (int i = left; i <= middle; i++)
             {
-                temp[k] = arr[t];
-                k++;
+                temp[index] = array[i];
+                index++;
             }
         }
-
-        for (int t=start; t<=end; t++)
+        
+        for (int i = start; i <= end; i++)
         {
-            arr[t] = temp[t];
+            array[i] = temp[i];
         }
 
-       
     }
-    public void MergeSortFunc(int[] arr, int start, int end)
-    {
+    public void MergeSortFunc(int[] array, int start, int end)
+    {        
         if (start < end)
         {
-            int mid = (start + end) / 2;
-            MergeSortFunc(arr, start, mid);
-            MergeSortFunc(arr, mid + 1, end);
+            int middle = (start + end) / 2;
+            MergeSortFunc(array, start, middle);
+            MergeSortFunc(array, middle + 1, end);
 
-            Merge(arr, start, mid, end);
+            Merge(array, start, middle, end);
         }
     }
 }
